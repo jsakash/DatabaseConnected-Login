@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+
+    <style>
+
+      .title-head-1{
+        margin-left: 32%;
+        padding: 10PX;
+      }
+      .create-bt{
+        padding-top: 15px;
+      }
+      .side-head{
+        margin-top: 20px;
+      }
+      
+    </style>
+
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Admin Panel</a>
+      <div class="cola" id="navbarSupportedContent">
+
+        <form class="d-flex">
+          <button class="btn btn-primary" type="submit"><a href="/logoutadmin"
+              style="text-decoration: none;color:white;"> Logout</a></button>
+             
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container ">
+    <div class="row align-items-center">
+      <div class="title-head-1 align-items-center">                   
+        <h1>WELCOME ADMIN !!! </h1>
+        
+
+      </div>
+    </div>
+  </div>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="side-head col-md-10">
+        <h3>These are the current Users.</h3>
+      </div>
+      <div class="create-bt col-md-2">
+        <button class=" createbtn btn btn-primary" type="submit"><a href="/createusr"
+          style="text-decoration: none;color:white;"> Create User</a></button>
+          
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+
+        <th scope="col">Users</th>
+        <th scope="col">DELETE</th>
+        <th scope="col">EDIT/UPDATE</th>
+        <th scope="col">BLOCK</th>
+        <th scope="col">UNBLOCK</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {{range $index,$value := .users}}
+      {{if .}}
+      <tr>
+        <th scope="row">{{$index}}</th>
+        <td>{{.}}</td>
+        <td> <a class="btn btn-danger" href="/delete/{{.}}">DELETE</a></td>
+
+        <td>
+          <form action="/update/{{.}}" method="post">
+            <input type="text" name="updatedata" value="{{.}}">
+            <button type="submit"> Update</button>
+          </form>
+        </td>
+
+        <td>
+
+          <form action="/block/{{.}}" method="post">
+
+            <button type="submit" class="btn btn-danger">BLOCK</button>
+
+          </form>
+
+        </td>
+
+        <td>
+          <form action="/unblock/{{.}}" method="post">
+
+            <button type="submit" class="btn btn-success">UNBLOCK</button>
+
+          </form>
+        </td>
+
+
+
+      </tr>{{end}}
+      {{end}}
+
+
+
+    </tbody>
+  </table>
+
+    
+ 
+</body>
+
+</html>
